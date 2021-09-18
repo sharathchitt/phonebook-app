@@ -21,13 +21,10 @@ export class ListNumbersComponent implements OnInit {
     this.apiService.getNumbers().subscribe( data => { this.numbersArr = data; });
   }
 
-  /**
-   * delete number click handler
-   * @param number number to delete
-   */
+
   deleteNumber(number: PhoneNumber): void {
     this.apiService.deleteNumber(number.id).subscribe( data => {
-      this.apiService.getNumbers().subscribe( numbers => { this.numbers = numbers; });
+      this.apiService.getNumbers().subscribe( numbers => { this.numbersArr = numbers; });
     });
   }
 
