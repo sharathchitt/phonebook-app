@@ -1,1 +1,44 @@
-<p>edit-number works!</p>
+<div class="mb-5">
+    <h2>Edit Number</h2>
+    <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+      <input type="hidden" formControlName="id" name="id">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input formControlName="name" name="name" class="form-control" id="name">
+      </div>
+      <div *ngIf="editForm.controls['name'].invalid && (editForm.controls['name'].dirty || editForm.controls['name'].touched)" class="alert alert-danger">
+        <div *ngIf="editForm.controls['name'].errors.required">
+          Name is required.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input formControlName="email" name="email" class="form-control" id="email">
+      </div>
+  
+      <div class="form-group">
+        <label for="number">Number:</label>
+        <input formControlName="number" name="number" class="form-control" id="number">
+      </div>
+      <div *ngIf="editForm.controls['number'].invalid && (editForm.controls['number'].dirty || editForm.controls['number'].touched)" class="alert alert-danger">
+        <div *ngIf="editForm.controls['number'].errors.required">
+          Number is required.
+        </div>
+      </div>
+
+      <div formArrayName="tags" class="form-group"
+        *ngFor="let item of editForm.get('tags')['controls']; let i = index;">
+        <div [formGroupName]="i">
+          <label for="tag{{i+1}}">Tag {{i+1}}:</label>
+          <input formControlName="tag" id="tag{{i+1}}" class="form-control">
+        </div>
+        <button *ngIf="editForm.get('tags')['controls'].length > 1" 
+                (click)="removeTag(i)" class="btn btn-danger mt-2">Remove tag</button>
+      </div>
+      <button (click)="addTag()" type="button" class="btn btn-secondary">Add tag</button>
+      <button class="btn btn-primary float-right"
+              [disabled]="editForm.invalid">Edit number</button>
+    </form>
+  </div>
+  <!-- <pre>{{editForm.value | json }}</pre>  -->
