@@ -1,1 +1,42 @@
-<p>list-numbers works!</p>
+<div class="">
+    <h2>PhoneBook</h2>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Number</th>
+        <th>Tags</th>
+        <th></th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let number of numbers">
+        <td>{{number.name}}</td>
+        <td>{{number.email}}</td>
+        <td>{{number.number}}</td>
+        <td>
+          <span *ngFor="let tag of number.tags" class="badge badge-primary" style="margin-right:5px;">{{tag}}</span>
+        </td>
+        <td>
+          <button class="btn btn-success" [routerLink]="['/edit-number', number.id]"> Edit</button>
+        </td>
+        <td>
+          <button class="btn btn-success" (click)="deleteNumber(number)"> Delete</button>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+          <button class="btn btn-primary" [routerLink]="['/add-number']"> Add Number</button>
+       </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- <pre>{{numbers | json }}</pre>  -->
