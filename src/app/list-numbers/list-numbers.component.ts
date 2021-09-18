@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from '../api.service';
+import { PhoneNumber } from '../models/phonenumber';
 
 @Component({
   selector: 'app-list-numbers',
@@ -14,17 +15,17 @@ export class ListNumbersComponent implements OnInit {
   /**
    * all numbers from database
    */
-  numbers: Number[];
+  numbersArr: PhoneNumber[]=[];
 
   ngOnInit() {
-    this.apiService.getNumbers().subscribe( data => { this.numbers = data; });
+    this.apiService.getNumbers().subscribe( data => { this.numbersArr = data; });
   }
 
   /**
    * delete number click handler
    * @param number number to delete
    */
-  deleteNumber(number: Number): void {
+  deleteNumber(number: PhoneNumber): void {
     this.apiService.deleteNumber(number.id).subscribe( data => {
       this.apiService.getNumbers().subscribe( numbers => { this.numbers = numbers; });
     });
